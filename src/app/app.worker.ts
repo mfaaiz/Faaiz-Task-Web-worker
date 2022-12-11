@@ -7,8 +7,15 @@ addEventListener('message', ({ data }) => {
 
   //data coming from main thread i.e {timer: '300', arraySize: '100', id: ''}
 
-  //filter base on id
-  let result = response.filter((table) => table.id.includes(data.id))
+  //split ids into array of id
+  let ids = data.id.split(',')
+
+  let result: any
+
+  //filter base on ids
+  result = response.filter((item: any) => {
+    return ids.indexOf(item.id) > -1
+  })
 
   //filter on array size i.e size of the data array can be adjusted via UI input
   let array = result.splice(0, data.arraySize)
