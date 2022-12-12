@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   reactiveForm = new FormGroup({
     timer: new FormControl(3000),
     arraySize: new FormControl(100),
-    id: new FormControl('1264,9761,18960'),
+    id: new FormControl('956,9761,970'),
   })
   displayedColumns: string[] = ['id', 'int', 'float', 'color', 'child']
   dataSource: any
@@ -35,13 +35,14 @@ export class AppComponent implements OnInit {
     if (typeof Worker !== 'undefined') {
       this.worker.onmessage = ({ data }) => {
         this.showTable = true
-        console.log('data array coming from the pseudo-socket=>', data)
+        console.log('data array coming from the pseudo-socket=>')
+        console.table(data)
         // render last 10 elements. on UI
         let lastTenElements = data.slice(data.length - 10)
 
         //transform response data(raw) to Table class
         let users = plainToClass(Table, lastTenElements)
-        console.log(users)
+        console.log('transform response data(raw) to Table class', users)
 
         this.dataSource = users
       }
